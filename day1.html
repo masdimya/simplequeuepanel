@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Queue Management</title>
+
+    <link rel="stylesheet" href="css/day1.css">
+</head>
+<body class="bg-gray-200">
+    <div class="maincontent p-2">
+        <div class="header flex m-2 px-3 align-middle">
+            <div class="logo nowserve h-16 w-16 bg-yellow-300 rounded-md shadow-md p-2 mr-4  mt-2">
+                <img class="h-12 w-12" src="icon-announcement.svg"  alt="">
+            </div> 
+            <div class="title leading-2 text-gray-900">
+                <h1 class="font-bold text-4xl tracking-widest ">AntriYuk</h5>
+                <h3 class="font-medium leading-3" >Mengantri Jadi Lebih Sabar & Asik</h6>
+            </div>
+            <div class="ml-64 font-bold text-xl mt-10 tracking-widest" id="message">Press Space to Start... </div>
+        </div>
+        <div class="flex ml-auto mr-auto mt-3">
+            <div class=" nowserve w-3/5 bg-white max-h-full m-5 rounded-large shadow-lg p-8 text-center text-gray-900">
+                <div class="title font-bold text-5xl  mt-5 tracking-widest">
+                    NOMOR ANTRIAN
+                </div>
+                <div class="mb-6 h-64"> 
+                    <span class="number font-bold text-xxl " id="number">10</span>
+                </div>
+                <div class="counter font-bold text-5xl mt-10 tracking-widest" id="counter">LOKET 1</div>
+
+
+            </div>
+            <div class="w-2/5 h-full">
+                <div class="date bg-white m-5 rounded-large shadow-md text-center align-middle p-4 ">
+                    <h5 class="time font-semibold text-gray-900 text-5xl tracking-widest  ">17:58</h5>
+                    <h6 class="dates font-bold text-gray-900 text-sm leading-3 ">22 Februari 2020</h6>
+                </div>
+                <div class="grid grid-cols-2 m-5">
+                    <div class="information m-5">
+                        <div class="title bg-blue-500 h-10 rounded-t-large p-2 text-center shadow-lg">
+                            <h3 class="text-gray-900 font-bold">LOKET 1</h3>
+                        </div>
+                        <div class="body  bg-white   h-32 rounded-b-large  p-2 text-center shadow-lg">
+                            <h6 class="numbercounter text-6xl text-gray-900 font-semibold " id="counter1">20</h6>
+                        </div>
+                    </div>
+                    
+                    <div class="information m-5">
+                        <div class="title bg-pink-400 h-10 rounded-t-large p-2 text-center shadow-lg">
+                            <h3 class="text-gray-900 font-bold">LOKET 2</h3>
+                        </div>
+                        <div class="body  bg-white    h-32 rounded-b-large  p-2 text-center shadow-lg">
+                            <h6 class="numbercounter text-6xl text-gray-900 font-semibold " id="counter2">20</h6>
+                        </div>
+                    </div>  
+
+                    <div class="information m-5">
+                        <div class="title bg-teal-400 h-10 rounded-t-large p-2 text-center shadow-lg">
+                            <h3 class="text-gray-900 font-bold">LOKET 3</h3>
+                        </div>
+                        <div class="body  bg-white    h-32 rounded-b-large  p-2 text-center shadow-lg">
+                            <h6 class="numbercounter text-6xl text-gray-900 font-semibold " id="counter3">20</h6>
+                        </div>
+                    </div>  
+
+                    <div class="information m-5">
+                        <div class="title bg-green-400 h-10 rounded-t-large p-2 text-center shadow-lg">
+                            <h3 class="text-gray-900 font-bold">LOKET 4</h3>
+                        </div>
+                        <div class="body  bg-white    h-32 rounded-b-large  p-2 text-center shadow-lg">
+                            <h6 class="numbercounter text-6xl text-gray-900 font-semibold " id="counter4">20</h6>
+                        </div>
+                    </div>      
+                  </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="mt-2 flex">
+        <div class="ml-auto mr-12  w-12 bg-yellow-300 text-center p-2 rounded-full shadow-lg"> 
+                <span class="text-xl" id="emot"> 🍔 </span>
+        </div> 
+    </div>
+</body>
+
+
+<script>
+
+    var emoji = ["🍕","🍔","🍟","🌭","🍿","🍖","🍗","🥩","🍘","🍙","🍚","🍛","🍜","🍧","🥧","🍭","🍬","🌻"];
+    var number = document.getElementById('number');
+    var counter = document.getElementById('counter');
+    var randomcounter;
+
+    document.addEventListener("keydown", function(event) {    
+        switch (event.which) {
+            case 32:
+                number.classList.add("active");
+
+                number.innerHTML = parseInt(number.innerHTML) + 1;        
+                
+                randomcounter = getRandomInt(4)+1;
+                counter.innerHTML='LOKET'+" "+randomcounter;
+                
+                document.getElementById("counter"+randomcounter).innerHTML = number.innerHTML; 
+                
+                document.getElementById("counter"+randomcounter).classList.add("active");
+
+                document.getElementById("emot").innerHTML = emoji[getRandomInt(emoji.length)]; 
+
+                if(!document.getElementById("message").classList.contains('hidden')){
+                    document.getElementById("message").classList.add("hidden");
+                }
+                
+                break;
+        
+            default:
+                break;
+        }
+    })
+
+    document.addEventListener("keyup", function(event) {
+        switch (event.which) {
+            case 32:
+                setTimeout(function(){
+                    number.classList.remove("active");
+                },100)
+
+                
+                setTimeout(function(){
+                    document.getElementById("counter"+randomcounter).classList.remove("active");
+                },150)
+
+                break;
+        
+            default:
+                break;
+        }
+    })
+
+    function getRandomInt(max) {
+        return Math.floor(Math.random() * Math.floor(max));
+    }
+
+    
+</script>
+
+</html>
